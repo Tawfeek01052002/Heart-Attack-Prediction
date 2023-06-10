@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>heart prediction </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+	<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="img"></div>
+<form class="form">
+	<h2>AGE</h2>
+    <input class="area"  type="number" id="uiage" class="floatLabel" name="ageui" value="63">
+	
+	<h2>Gender</h2>
+    <input class="area"  type="number" id="uisex" class="floatLabel" name="sexui" value="0">
+
+    <h2>CP</h2>
+    <input class="area"  type="number" id="uicp" class="floatLabel" name="cpui" value="0">
+
+    <h2>Trestbps</h2>
+    <input class="area"  type="number" id="uitrest" class="floatLabel" name="trestbpsui" value="124">
+
+    <h2>chol</h2>
+    <input class="area"  type="number" id="uichol" class="floatLabel" name="cholui" value="197">
+
+    <h2>fbs</h2>
+    <input class="area"  type="number" id="uifbs" class="floatLabel" name="fbsui" value="0">
+
+    <h2>restecg</h2>
+    <input class="area"  type="number" id="uirest" class="floatLabel" name="trestecgui" value="1">
+
+    <h2>thalach</h2>
+    <input class="area"  type="number" id="uithalach" class="floatLabel" name="thalachui" value="136">
+
+    <h2>exang</h2>
+    <input class="area"  type="number" id="uiexang" class="floatLabel" name="exangui" value="1">
+	
+	<h2>oldpeak</h2>
+    <input class="area"  type="number" id="uioldpeak" class="floatLabel" name="oldpeakui" value="0.0">
+	
+	<h2>slope</h2>
+    <input class="area"  type="number" id="uislope" class="floatLabel" name="slopeui" value="1">
+    <h2>ca</h2>
+    <input class="area"  type="number" id="uica" class="floatLabel" name="caui" value="0">
+
+    <h2>thal</h2>
+    <input class="area"  type="number" id="uithal" class="floatLabel" name="thalui" value="2">
+	
+
+</form>
+<form class="form">
+	
+	<button class="submit" onclick="onClickedEstimatePrice()" type="button">Submit</button>
+	<div id="uiEstimatedPrice" class="result">	<h2></h2> </div>
+</form>
+</body>
+</html>
