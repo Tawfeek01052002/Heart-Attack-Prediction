@@ -10,7 +10,6 @@ __data_columns = None
 __model = None
 
 app = Flask(__name__)
-CORS(app)
 
 def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal):
     dic = {}
