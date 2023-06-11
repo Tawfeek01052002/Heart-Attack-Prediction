@@ -27,7 +27,6 @@ def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach,
     dic['ca'] = ca
     dic['thal'] = thal
     data = pd.DataFrame(dic, index=[0])
-
     return __model.predict(data)[0]
 
 
