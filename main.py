@@ -1,17 +1,17 @@
+from flask import Flask, request, jsonify
 import json
 import pickle
 import numpy as np
 import pandas as pd
-from flask import Flask, request, jsonify
-import util
+
+app = Flask(__name__)
 
 __locations = None
 __data_columns = None
 __model = None
 
-app = Flask(__name__)
-
-def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal):
+def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach,
+                 exang, oldpeak, slope, ca, thal):
     dic = {}
     dic['age'] = age
     dic['sex'] = sex
@@ -27,17 +27,41 @@ def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, ol
     dic['ca'] = ca
     dic['thal'] = thal
     data = pd.DataFrame(dic, index=[0])
+
     return __model.predict(data)[0]
 
-@app.route('/get_location_names')
+
 def get_location_names():
+    return __locations
+
+
+def load_saved_artifacts():
+    print("loading stats here...")
+    global __locations
+    global __data_columns
+    global __model
+
+    with open('./artifacts/column.json', 'r') as f:
+        __data_columns = json.load(f)["data_columns"]
+        __locations = __data_columns[3:]
+
+    with open('./artifacts/heart_detail.pickle', 'rb') as f:
+        __model = pickle.load(f)
+
+    print('loading is done...')
+
+
+@app.route('/get_location_names')
+def get_location_names_route():
     response = jsonify({
-        'locations': util.get_location_names()
+        'locations': get_location_names()
     })
     response.headers.add('Access-Control-Allow-Origin', '*')
+
     return response
 
-@app.route('/predict_value', methods=['GET', 'POST'])
+
+@app.route('/predict_value', methods=['POST'])
 def predict_value():
     age = request.form['ageui']
     sex = request.form['sex']
@@ -54,12 +78,15 @@ def predict_value():
     thal = request.form['thal']
 
     response = jsonify({
-        'estimated_value': int(util.get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal))
+        'estimated_value': int(get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach,
+                                             exang, oldpeak, slope, ca, thal))
     })
+
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
 if __name__ == '__main__':
     print('starting python flask server')
-    util.load_saved_artifacts()
+    load_saved_artifacts()
     app.run()
