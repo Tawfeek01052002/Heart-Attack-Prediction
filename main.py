@@ -62,6 +62,7 @@ def get_location_names_route():
 
 @app.route('/predict_value', methods=['POST'])
 def predict_value():
+    load_saved_artifacts()
     age = request.form['ageui']
     sex = request.form['sex']
     cp = request.form['cp']
@@ -87,5 +88,4 @@ def predict_value():
 
 if __name__ == '__main__':
     print('starting python flask server')
-    load_saved_artifacts()
     app.run()
