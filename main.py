@@ -11,29 +11,27 @@ __locations = None
 __data_columns = None
 __model = None
 
-def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach,
-                 exang, oldpeak, slope, ca, thal):
-    dic = {}
-    dic['age'] = age
-    dic['sex'] = sex
-    dic['cp'] = cp
-    dic['trestbps'] = trestbps
-    dic['chol'] = chol
-    dic['fbs'] = fbs
-    dic['restecg'] = restecg
-    dic['thalach'] = thalach
-    dic['exang'] = exang
-    dic['oldpeak'] = oldpeak
-    dic['slope'] = slope
-    dic['ca'] = ca
-    dic['thal'] = thal
-    data = pd.DataFrame(dic, index=[0])
+def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal):
+    dic = {
+        'age': [age],
+        'sex': [sex],
+        'cp': [cp],
+        'trestbps': [trestbps],
+        'chol': [chol],
+        'fbs': [fbs],
+        'restecg': [restecg],
+        'thalach': [thalach],
+        'exang': [exang],
+        'oldpeak': [oldpeak],
+        'slope': [slope],
+        'ca': [ca],
+        'thal': [thal]
+    }
+    data = pd.DataFrame(dic)
     return __model.predict(data)[0]
-
 
 def get_location_names():
     return __locations
-
 
 def load_saved_artifacts():
     print("loading stats here...")
@@ -50,7 +48,6 @@ def load_saved_artifacts():
 
     print('loading is done...')
 
-
 @app.route('/get_location_names')
 def get_location_names_route():
     response = jsonify({
@@ -59,7 +56,6 @@ def get_location_names_route():
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
-
 
 @app.route('/predict_value', methods=['POST'])
 def predict_value():
@@ -79,14 +75,13 @@ def predict_value():
     thal = request.form['thal']
 
     response = jsonify({
-        'estimated_value': int(get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach,
-                                             exang, oldpeak, slope, ca, thal))
+        'estimated_value': int(get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal))
     })
 
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-
 if __name__ == '__main__':
+    load_saved_artifacts()
     print('starting python flask server')
     app.run()
