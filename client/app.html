@@ -2,58 +2,184 @@
 <html>
 
 <head>
-    <title>heart prediction </title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Heart Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
-    <link rel="stylesheet" href="app.css">
+    <style>
+        body {
+            padding: 10px;
+            background-image: url("./back.jpg");
+            background-size: 100%;
+            background-repeat: none;
+        }
+
+        .container {
+            margin-top: 50px;
+            margin-right: auto;
+            margin-bottom: 0;
+            margin-left: auto;
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e2e2e2;
+            color: black;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="img"></div>
-    <form class="form" method="post">
-        <h2>AGE</h2>
-        <input class="area" type="number" id="uiage" class="floatLabel" name="ageui" value="63">
+    <div class="container">
+        <h1 id="head" class="p-3 text-center">Heart Attack Prediction</h1>
+        <div class="img"></div>
+        <form class="form" method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uiage">AGE</label>
+                        <input class="form-control" type="number" id="uiage" name="ageui"
+                            placeholder="Age of Patient (Years)" required>
+                    </div>
+                </div>
 
-        <h2>Gender</h2>
-        <input class="area" type="number" id="uisex" class="floatLabel" name="sexui" value="0">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uisex">Gender</label>
+                        <input class="form-control" type="number" id="uisex" name="sexui"
+                            placeholder="Sex of the Patient (1 = Male; 0 = Female)" required>
+                    </div>
+                </div>
 
-        <h2>CP</h2>
-        <input class="area" type="number" id="uicp" class="floatLabel" name="cpui" value="0">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uicp">Chest Pain</label>
+                        <input class="form-control" type="number" id="uicp" name="cpui" placeholder="Chest Pain type" required>
+                        <p class="p-2">Value 0: Typical angina <br>
+                            Value 1: Atypical angina<br>
+                            Value 2: Non-anginal pain<br>
+                            Value 3: Asymptomatic</p>
+                    </div>
+                </div>
+            </div>
 
-        <h2>Trestbps</h2>
-        <input class="area" type="number" id="uitrest" class="floatLabel" name="trestbpsui" value="124">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uitrest">Resting Blood Pressure</label>
+                        <input class="form-control" type="number" id="uitrest" name="trestbpsui"
+                            placeholder="Resting blood pressure  in (mm Hg)" required>
+                    </div>
+                </div>
 
-        <h2>chol</h2>
-        <input class="area" type="number" id="uichol" class="floatLabel" name="cholui" value="197">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uichol">Cholesterol</label>
+                        <input class="form-control" type="number" id="uichol" name="cholui"
+                            placeholder="Cholestoral in mg/dl fetched via BMI sensor" required>
+                    </div>
+                </div>
 
-        <h2>fbs</h2>
-        <input class="area" type="number" id="uifbs" class="floatLabel" name="fbsui" value="0">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uifbs">Fasting blood sugar</label>
+                        <input class="form-control" type="number" id="uifbs" name="fbsui"
+                            placeholder="Fasting blood sugar > 120 mg/dl (1 = true; 0 = false)" required>
+                    </div>
+                </div>
+            </div>
 
-        <h2>restecg</h2>
-        <input class="area" type="number" id="uirest" class="floatLabel" name="trestecgui" value="1">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uirest">Resting Electrocardiographic Results</label>
+                        <input class="form-control" type="number" id="uirest" name="trestecgui"
+                            placeholder="Restecg value" required>
+                        <p class="p-2"> <b> Value 0: </b> normal <br>
+                            <b> Value 1:</b> having ST-T wave abnormality (T wave inversions and/or ST elevation or
+                            depression
+                            of > 0.05 mV) <br>
+                            <b>Value 2:</b> showing probable or definite left ventricular hypertrophy by Estes' criteria
+                        </p>
+                    </div>
+                </div>
 
-        <h2>thalach</h2>
-        <input class="area" type="number" id="uithalach" class="floatLabel" name="thalachui" value="136">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uithalach">Maximum Heart Rate</label>
+                        <input class="form-control" type="number" id="uithalach" name="thalachui"
+                            placeholder="Maximum heart rate achieved (beats per minute)" required>
+                    </div>
+                </div>
 
-        <h2>exang</h2>
-        <input class="area" type="number" id="uiexang" class="floatLabel" name="exangui" value="1">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uiexang">Exercise Induced Angina</label>
+                        <input class="form-control" type="number" id="uiexang" name="exangui"
+                            placeholder="Exercise induced angina (1 = Yes; 0 = No)" required>
+                    </div>
+                </div>
+            </div>
 
-        <h2>oldpeak</h2>
-        <input class="area" type="number" id="uioldpeak" class="floatLabel" name="oldpeakui" value="0.0">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uioldpeak">Oldpeak</label>
+                        <input class="form-control" type="number" id="uioldpeak" name="oldpeakui"
+                            placeholder="ST Depression Induced by Exercise Relative to Rest (mm)" required>
+                    </div>
+                </div>
 
-        <h2>slope</h2>
-        <input class="area" type="number" id="uislope" class="floatLabel" name="slopeui" value="1">
-        <h2>ca</h2>
-        <input class="area" type="number" id="uica" class="floatLabel" name="caui" value="0">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uislope">Slope</label>
+                        <input class="form-control" type="number" id="uislope" name="slopeui"
+                            placeholder="Slope of the Peak Exercise ST Segment" required>
+                    </div>
+                    <p class="p-2"> <b> Value 0: </b> Upsloping ST segment <br>
+                        <b> Value 1:</b> Flat ST segment<br>
+                        <b>Value 2:</b> Downsloping ST segment
+                    </p>
+                </div>
 
-        <h2>thal</h2>
-        <input class="area" type="number" id="uithal" class="floatLabel" name="thalui" value="2">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uica">Number of Major Vessels</label>
+                        <input class="form-control" type="number" id="uica" name="caui"
+                            placeholder="Number of major vessels (0-3)">
+                    </div>
+                </div>
+            </div>
 
-        <button class="submit" onclick="onClickedEstimatePrice()" type="button">Submit</button>
-        <div id="uiEstimatedPrice" class="result">
-            <h2></h2>
-        </div>
-    </form>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="uithal">Thalassemia </label>
+                        <input class="form-control" type="number" id="uithal" name="thalui"
+                            placeholder="Thalassemia value">
+                        <p class="p-2"> <b> Value 0: </b> Alpha Thalassemia <br>
+                            <b> Value 1:</b> Beta Thalassemia <br>
+                            <b>Value 2:</b> Hemoglobin H
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="onClickedEstimatePrice()" type="button">Check</button>
+            <button class="btn btn-danger text-white" onclick="reseting()" type="reset">Reset</button>
+            <div id="uiEstimatedPrice" class="result mt-4 text-center text-white p-2">
+                <h2></h2>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

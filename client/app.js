@@ -23,26 +23,41 @@ function onClickedEstimatePrice() {
 
   console.log(url);
   $.post(url, {
-      ageui: parseInt(age.value),
-      sex: parseInt(sex.value),
-      cp: parseInt(cp.value),
-      trestbps: parseInt(trestbps.value),
-      chol :parseInt(chol.value),
-      fbs:parseInt(fbs.value),
-      restecg:parseInt(restecg.value),
-      thalach :parseInt(thalach.value),
-      exang :parseInt(exang.value),
-      oldpeak :parseFloat(oldpeak.value),
-      slope :parseInt(slope.value),
-      ca : parseInt(ca.value),
-      thal : parseInt(thal.value)
-  },function(data, status) {
+    ageui: parseInt(age.value),
+    sex: parseInt(sex.value),
+    cp: parseInt(cp.value),
+    trestbps: parseInt(trestbps.value),
+    chol: parseInt(chol.value),
+    fbs: parseInt(fbs.value),
+    restecg: parseInt(restecg.value),
+    thalach: parseInt(thalach.value),
+    exang: parseInt(exang.value),
+    oldpeak: parseFloat(oldpeak.value),
+    slope: parseInt(slope.value),
+    ca: parseInt(ca.value),
+    thal: parseInt(thal.value)
+  }, function (data, status) {
     console.log(url);
     console.log("Inside");
-      console.log(data.estimated_value);
-      estPrice.innerHTML = "<h2>" + 10 + " Lakh</h2>";
-      console.log(status);
+    console.log(data.estimated_value);
+    if (data.estimated_value == 1) {
+      estPrice.innerHTML = `<h2>Heart Attack: Positive </h2> <br>
+      <p>Admit the Patient to the Hospital</p>`;
+      estPrice.style.background = "Red";
+      estPrice.style.borderRadius = "5px";
+    }
+    else {
+      estPrice.innerHTML = `<h2>Heart Attack: Negative </h2> <br>
+      <p>Patient is safe</p>`;
+      estPrice.style.background = "green";
+      estPrice.style.borderRadius = "5px";
+    }
   });
 }
 
-
+function reseting(){
+  console.log("reset");
+  var estPrice = document.getElementById("uiEstimatedPrice");
+  estPrice.innerHTML="";
+  estPrice.style.display="none";
+}
