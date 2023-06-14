@@ -11,27 +11,45 @@ __locations = None
 __data_columns = None
 __model = None
 
-def get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal):
+
+def get_estimated(age, sex, cp_0, cp_1, cp_2, cp_3, trestbps, chol, fbs, restecg_0, restecg_1, restecg_2, thalachh, exang_0, exang_1, oldpeak, slp_0, slp_1, slp_2, caa_0, caa_1, caa_2, caa_3, caa_4, thall_0, thall_1, thall_2, thall_3):
     dic = {
         'age': [age],
         'sex': [sex],
-        'cp': [cp],
+        'cp_0': [cp_0],
+        'cp_1': [cp_1],
+        'cp_2': [cp_2],
+        'cp_3': [cp_3],
         'trestbps': [trestbps],
         'chol': [chol],
         'fbs': [fbs],
-        'restecg': [restecg],
-        'thalach': [thalach],
-        'exang': [exang],
+        'restecg_0': [restecg_0],
+        'restecg_1': [restecg_1],
+        'restecg_2': [restecg_2],
+        'thalachh': [thalachh],
+        'exang_0': [exang_0],
+        'exang_1': [exang_1],
         'oldpeak': [oldpeak],
-        'slope': [slope],
-        'ca': [ca],
-        'thal': [thal]
+        'slp_0': [slp_0],
+        'slp_1': [slp_1],
+        'slp_2': [slp_2],
+        'caa_0': [caa_0],
+        'caa_1': [caa_1],
+        'caa_2': [caa_2],
+        'caa_3': [caa_3],
+        'caa_4': [caa_4],
+        'thall_0': [thall_0],
+        'thall_1': [thall_1],
+        'thall_2': [thall_2],
+        'thall_3': [thall_3]
     }
     data = pd.DataFrame(dic)
     return __model.predict(data)[0]
 
+
 def get_location_names():
     return __locations
+
 
 def load_saved_artifacts():
     print("loading stats here...")
@@ -47,6 +65,7 @@ def load_saved_artifacts():
         __model = pickle.load(f)
     print('loading is done...')
 
+
 @app.route('/get_location_names')
 def get_location_names_route():
     response = jsonify({
@@ -55,6 +74,7 @@ def get_location_names_route():
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
+
 
 @app.route('/predict_value', methods=['POST'])
 def predict_value():
@@ -89,11 +109,12 @@ def predict_value():
     thall_3 = request.form['thall_3']
 
     response = jsonify({
-        'estimated_value': int(get_estimated(age, sex,cp_0,cp_1,cp_2, cp_3, trestbps, chol, fbs, restecg_0,restecg_1,restecg_2, thalachh,exng_0, exng_1, oldpeak, slp_0,slp_1,slp_2, caa_0,caa_1,caa_2,caa_3,caa_4, thall_0,thall_1,thall_2,thall_3))
+        'estimated_value': int(get_estimated(age, sex, cp_0, cp_1, cp_2, cp_3, trestbps, chol, fbs, restecg_0, restecg_1, restecg_2, thalachh, exng_0, exng_1, oldpeak, slp_0, slp_1, slp_2, caa_0, caa_1, caa_2, caa_3, caa_4, thall_0, thall_1, thall_2, thall_3))
     })
 
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
+
 
 if __name__ == '__main__':
     load_saved_artifacts()
