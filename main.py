@@ -45,7 +45,6 @@ def load_saved_artifacts():
 
     with open('./artifacts/heart_detail.pickle', 'rb') as f:
         __model = pickle.load(f)
-
     print('loading is done...')
 
 @app.route('/get_location_names')
