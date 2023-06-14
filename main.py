@@ -59,22 +59,37 @@ def get_location_names_route():
 @app.route('/predict_value', methods=['POST'])
 def predict_value():
     load_saved_artifacts()
-    age = request.form['ageui']
+    age = request.form['age']
     sex = request.form['sex']
-    cp = request.form['cp']
+    cp_0 = request.form['cp_0']
+    cp_1 = request.form['cp_1']
+    cp_2 = request.form['cp_2']
+    cp_3 = request.form['cp_3']
     trestbps = request.form['trestbps']
     chol = request.form['chol']
     fbs = request.form['fbs']
-    restecg = request.form['restecg']
-    thalach = request.form['thalach']
-    exang = request.form['exang']
+    restecg_0 = request.form['restecg_0']
+    restecg_1 = request.form['restecg_1']
+    restecg_2 = request.form['restecg_2']
+    thalachh = request.form['thalachh']
+    exng_0 = request.form['exng_0']
+    exng_1 = request.form['exng_1']
     oldpeak = request.form['oldpeak']
-    slope = request.form['slope']
-    ca = request.form['ca']
-    thal = request.form['thal']
+    slp_0 = request.form['slp_0']
+    slp_1 = request.form['slp_1']
+    slp_2 = request.form['slp_2']
+    caa_0 = request.form['caa_0']
+    caa_1 = request.form['caa_1']
+    caa_2 = request.form['caa_2']
+    caa_3 = request.form['caa_3']
+    caa_4 = request.form['caa_4']
+    thall_0 = request.form['thall_0']
+    thall_1 = request.form['thall_1']
+    thall_2 = request.form['thall_2']
+    thall_3 = request.form['thall_3']
 
     response = jsonify({
-        'estimated_value': int(get_estimated(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal))
+        'estimated_value': int(get_estimated(age, sex,cp_0,cp_1,cp_2, cp_3, trestbps, chol, fbs, restecg_0,restecg_1,restecg_2, thalachh,exng_0, exng_1, oldpeak, slp_0,slp_1,slp_2, caa_0,caa_1,caa_2,caa_3,caa_4, thall_0,thall_1,thall_2,thall_3))
     })
 
     response.headers.add('Access-Control-Allow-Origin', '*')
