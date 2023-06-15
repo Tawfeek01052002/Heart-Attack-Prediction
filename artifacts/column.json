@@ -1,1 +1,1 @@
-{"data_columns": ["age", "sex", "trtbps", "chol", "fbs", "thalachh", "oldpeak", "cp_0", "cp_1", "cp_2", "cp_3", "restecg_0", "restecg_1", "restecg_2", "exng_0", "exng_1", "slp_0", "slp_1", "slp_2", "caa_0", "caa_1", "caa_2", "caa_3", "caa_4", "thall_0", "thall_1", "thall_2", "thall_3"]}
+{"data_columns": ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg", "thalach", "exang", "oldpeak", "slope", "ca", "thal"]}
